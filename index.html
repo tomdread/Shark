@@ -128,7 +128,7 @@
       <p>Book Shark for a ride in Tamraght</p>
       <input id="userPhone" type="text" placeholder="Your phone number" />
       <div class="button-row">
-        <!-- Button inserted by JS -->
+        <!-- Button will be added by JS -->
       </div>
     </div>
   </div>
@@ -157,10 +157,9 @@
 
     function sendToWhatsApp(lang) {
       const userPhone = document.getElementById("userPhone").value.trim();
-      const newWindow = window.open("", "_blank");
 
       if (!navigator.geolocation) {
-        alert("Geolocation not supported on this device.");
+        alert("Geolocation not supported.");
         return;
       }
 
@@ -169,8 +168,8 @@
           const lat = position.coords.latitude.toFixed(5);
           const lon = position.coords.longitude.toFixed(5);
           const mapsLink = `https://www.google.com/maps?q=${lat},${lon}`;
-          let message = "";
 
+          let message = "";
           switch (lang) {
             case "fr":
               message = `Salut Shark ! Je veux réserver une course à Tamraght. Mon numéro est ${userPhone}. Voici ma position: ${mapsLink}`;
@@ -184,10 +183,17 @@
 
           const encoded = encodeURIComponent(message);
           const waUrl = `https://wa.me/${sharkNumber}?text=${encoded}`;
-          newWindow.location.href = waUrl;
+
+          // SAFARI FIX: Create a dynamic <a> element and click it
+          const link = document.createElement("a");
+          link.href = waUrl;
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
         },
         (error) => {
-          newWindow.close();
           alert("Could not get your location. Please enable GPS.");
           console.error("Geolocation error:", error);
         }
