@@ -117,10 +117,10 @@
 <body>
   <div class="overlay">
     <div class="top-icons">
-      <a href="https://web.facebook.com/ShaarkOfficiallaka" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-      <a href="https://www.youtube.com/@redsosoofficial" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-      <a href="https://www.instagram.com/shaarkofficial/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.tiktok.com/@redaidlahcen" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+      <a href="https://web.facebook.com/ShaarkOfficiallaka" target="_blank"><i class="fab fa-facebook"></i></a>
+      <a href="https://www.youtube.com/@redsosoofficial" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.instagram.com/shaarkofficial/" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@redaidlahcen" target="_blank"><i class="fab fa-tiktok"></i></a>
     </div>
 
     <div class="bottom-form">
@@ -128,76 +128,21 @@
       <p>Book Shark for a ride in Tamraght</p>
       <input id="userPhone" type="text" placeholder="Your phone number" />
       <div class="button-row">
-        <!-- Button will be added by JS -->
+        <button onclick="sendText()">📞 Book Now via WhatsApp</button>
       </div>
     </div>
   </div>
 
   <script>
     const sharkNumber = "212617095360";
-    const userLang = navigator.language.toLowerCase();
-    let lang = 'en';
-    if (userLang.startsWith('fr')) lang = 'fr';
-    else if (userLang.startsWith('ar')) lang = 'ar';
 
-    const buttonLabels = {
-      en: "📞 Book a Ride",
-      fr: "📞 Réserver une Course",
-      ar: "📞 N7ezo Shark"
-    };
-
-    window.addEventListener('DOMContentLoaded', () => {
-      const buttonRow = document.querySelector(".button-row");
-      const bookBtn = document.createElement("button");
-      bookBtn.textContent = buttonLabels[lang] || buttonLabels["en"];
-      bookBtn.onclick = () => sendToWhatsApp(lang);
-      buttonRow.innerHTML = "";
-      buttonRow.appendChild(bookBtn);
-    });
-
-    function sendToWhatsApp(lang) {
+    function sendText() {
       const userPhone = document.getElementById("userPhone").value.trim();
+      const message = `Hi Shark! I want a ride in Tamraght. My number is ${userPhone}`;
+      const encoded = encodeURIComponent(message);
+      const waUrl = `https://wa.me/${sharkNumber}?text=${encoded}`;
 
-      if (!navigator.geolocation) {
-        alert("Geolocation not supported.");
-        return;
-      }
-
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const lat = position.coords.latitude.toFixed(5);
-          const lon = position.coords.longitude.toFixed(5);
-          const mapsLink = `https://www.google.com/maps?q=${lat},${lon}`;
-
-          let message = "";
-          switch (lang) {
-            case "fr":
-              message = `Salut Shark ! Je veux réserver une course à Tamraght. Mon numéro est ${userPhone}. Voici ma position: ${mapsLink}`;
-              break;
-            case "ar":
-              message = `Salam Shark! Bghit ntla9aw f Tamraght. Rani hna: ${userPhone}. Lmaw9i3 dyali: ${mapsLink}`;
-              break;
-            default:
-              message = `Hi Shark! I'd like to book a ride in Tamraght. My number is ${userPhone}. Here is my location: ${mapsLink}`;
-          }
-
-          const encoded = encodeURIComponent(message);
-          const waUrl = `https://wa.me/${sharkNumber}?text=${encoded}`;
-
-          // SAFARI FIX: Create a dynamic <a> element and click it
-          const link = document.createElement("a");
-          link.href = waUrl;
-          link.target = "_blank";
-          link.rel = "noopener noreferrer";
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-        },
-        (error) => {
-          alert("Could not get your location. Please enable GPS.");
-          console.error("Geolocation error:", error);
-        }
-      );
+      window.location.href = waUrl; // Always works in Safari
     }
   </script>
 </body>
