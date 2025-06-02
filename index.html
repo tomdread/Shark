@@ -16,37 +16,54 @@
       background-size: cover;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
     }
 
     .overlay {
       background: rgba(0, 0, 0, 0.5);
-      padding: 2rem 1rem;
-      text-align: center;
-      flex: 1;
+      height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      padding: 1rem;
+      box-sizing: border-box;
     }
 
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 0.5em;
+    .top-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5em;
+      font-size: 1.8em;
+      padding: 1em 0 0.5em;
     }
 
-    p {
-      margin-top: 0;
-      font-size: 1.2em;
+    .top-icons a {
+      color: white;
+      transition: color 0.2s;
     }
 
-    .form {
+    .top-icons a:hover {
+      color: #ff4d4d;
+    }
+
+    .bottom-form {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-top: 2em;
+      text-align: center;
+      margin-bottom: 2rem;
     }
 
-    .form input {
+    h1 {
+      font-size: 2.4em;
+      margin: 0.2em 0;
+    }
+
+    p {
+      font-size: 1.1em;
+      margin: 0.2em 0 1.5em;
+    }
+
+    input {
       padding: 0.8em;
       width: 90%;
       max-width: 400px;
@@ -56,7 +73,13 @@
       margin-bottom: 1em;
     }
 
-    .form button {
+    .button-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5em;
+    }
+
+    button {
       padding: 0.8em 2em;
       font-size: 1em;
       background-color: #ff4d4d;
@@ -66,68 +89,87 @@
       cursor: pointer;
     }
 
-    .form button:hover {
+    button:hover {
       background-color: #e60000;
     }
 
-    .socials {
-      margin-top: 2em;
-      display: flex;
-      justify-content: center;
-      gap: 1.5em;
-    }
-
-    .socials a {
-      color: white;
-      font-size: 2em;
-      transition: color 0.3s;
-    }
-
-    .socials a:hover {
-      color: #ff4d4d;
-    }
-
     @media (max-width: 500px) {
-      h1 {
-        font-size: 2em;
-      }
-
-      .form input {
-        font-size: 1em;
-      }
-
-      .form button {
-        font-size: 1em;
-      }
-
-      .socials {
+      .top-icons {
+        font-size: 1.4em;
         gap: 1em;
       }
 
-      .socials a {
-        font-size: 1.5em;
+      h1 {
+        font-size: 1.8em;
+      }
+
+      p {
+        font-size: 1em;
+      }
+
+      .button-row {
+        width: 100%;
+        padding: 0 1em;
       }
     }
   </style>
 </head>
 <body>
   <div class="overlay">
-    <div>
-      <h1>Redia With Me</h1>
-      <p>Book Shark for a ride in Tamraght</p>
-
-      <div class="form">
-        <input type="text" placeholder="Your phone number" />
-        <button>Book a Ride</button>
-      </div>
-    </div>
-
-    <div class="socials">
+    <div class="top-icons">
       <a href="https://web.facebook.com/ShaarkOfficiallaka" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
       <a href="https://www.youtube.com/@redsosoofficial" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
       <a href="https://www.instagram.com/shaarkofficial/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
       <a href="https://www.tiktok.com/@redaidlahcen" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
     </div>
+
+    <div class="bottom-form">
+      <h1>Redia With Me</h1>
+      <p>Book Shark for a ride in Tamraght</p>
+      <input id="userPhone" type="text" placeholder="Your phone number" />
+      <div class="button-row">
+        <button onclick="sendToWhatsApp('en')">📞 Book in English</button>
+        <button onclick="sendToWhatsApp('fr')">📞 Réserver en Français</button>
+        <button onclick="sendToWhatsApp('ar')">📞 N7ezo Shark</button>
+        <button onclick="shareSite()">🔗 Share this site</button>
+      </div>
+    </div>
   </div>
+
+  <script>
+    const sharkNumber = "212617095360"; // Shark's real WhatsApp number
+
+    function sendToWhatsApp(lang) {
+      const userPhone = document.getElementById("userPhone").value.trim();
+      let message = "";
+
+      switch (lang) {
+        case "fr":
+          message = `Salut Shark ! Je veux réserver une course à Tamraght. Mon numéro est ${userPhone}`;
+          break;
+        case "ar":
+          message = `Salam Shark! Bghit ntla9aw f Tamraght. Rani hna: ${userPhone}`;
+          break;
+        default:
+          message = `Hi Shark! I'd like to book a ride in Tamraght. My number is ${userPhone}`;
+      }
+
+      const encoded = encodeURIComponent(message);
+      const waUrl = `https://wa.me/${sharkNumber}?text=${encoded}`;
+      window.open(waUrl, "_blank");
+    }
+
+    function shareSite() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'Redia With Me – Book Shark!',
+          text: 'Want a ride with Shark in Tamraght? Hit this link:',
+          url: window.location.href
+        }).catch(err => console.error('Share failed:', err));
+      } else {
+        alert("Sharing not supported on this device. Just copy the URL.");
+      }
+    }
+  </script>
 </body>
 </html>
