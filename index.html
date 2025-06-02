@@ -135,41 +135,59 @@
       </div>
     </div>
   </div>
+<script>
+  const sharkNumber = "212617095360"; // Shark's real WhatsApp number
 
-  <script>
-    const sharkNumber = "212617095360"; // Shark's real WhatsApp number
+  function sendToWhatsApp(lang) {
+    const userPhone = document.getElementById("userPhone").value.trim();
 
-    function sendToWhatsApp(lang) {
-      const userPhone = document.getElementById("userPhone").value.trim();
-      let message = "";
-
-      switch (lang) {
-        case "fr":
-          message = `Salut Shark ! Je veux réserver une course à Tamraght. Mon numéro est ${userPhone}`;
-          break;
-        case "ar":
-          message = `Salam Shark! Bghit ntla9aw f Tamraght. Rani hna: ${userPhone}`;
-          break;
-        default:
-          message = `Hi Shark! I'd like to book a ride in Tamraght. My number is ${userPhone}`;
-      }
-
-      const encoded = encodeURIComponent(message);
-      const waUrl = `https://wa.me/${sharkNumber}?text=${encoded}`;
-      window.open(waUrl, "_blank");
+    // First get location
+    if (!navigator.geolocation) {
+      alert("Geolocation not supported on this device.");
+      return;
     }
 
-    function shareSite() {
-      if (navigator.share) {
-        navigator.share({
-          title: 'Redia With Me – Book Shark!',
-          text: 'Want a ride with Shark in Tamraght? Hit this link:',
-          url: window.location.href
-        }).catch(err => console.error('Share failed:', err));
-      } else {
-        alert("Sharing not supported on this device. Just copy the URL.");
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const lat = position.coords.latitude.toFixed(5);
+        const lon = position.coords.longitude.toFixed(5);
+        const mapsLink = `https://www.google.com/maps?q=${lat},${lon}`;
+
+        let message = "";
+
+        switch (lang) {
+          case "fr":
+            message = `Salut Shark ! Je veux réserver une course à Tamraght. Mon numéro est ${userPhone}. Voici ma position: ${mapsLink}`;
+            break;
+          case "ar":
+            message = `Salam Shark! Bghit ntla9aw f Tamraght. Rani hna: ${userPhone}. Lmaw9i3 dyali: ${mapsLink}`;
+            break;
+          default:
+            message = `Hi Shark! I'd like to book a ride in Tamraght. My number is ${userPhone}. Here is my location: ${mapsLink}`;
+        }
+
+        const encoded = encodeURIComponent(message);
+        const waUrl = `https://wa.me/${sharkNumber}?text=${encoded}`;
+        window.open(waUrl, "_blank");
+      },
+      (error) => {
+        alert("Could not get your location. Please enable GPS.");
+        console.error("Geolocation error:", error);
       }
+    );
+  }
+
+  function shareSite() {
+    if (navigator.share) {
+      navigator.share({
+        title: 'Redia With Me – Book Shark!',
+        text: 'Want a ride with Shark in Tamraght? Hit this link:',
+        url: window.location.href
+      }).catch(err => console.error('Share failed:', err));
+    } else {
+      alert("Sharing not supported on this device. Just copy the URL.");
     }
-  </script>
+  }
+</script>
 </body>
 </html>
