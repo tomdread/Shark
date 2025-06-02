@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Redia With Me – Shaark Official</title>
+  <title>Redia With Me – Shark Official</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
   <style>
     html, body {
@@ -124,70 +124,72 @@
     </div>
 
     <div class="bottom-form">
-      <h1>Shart InDrive</h1>
-      <p>Book The Shark for the offical ride</p>
+      <h1>Redia With Me</h1>
+      <p>Book Shark for a ride in Tamraght</p>
       <input id="userPhone" type="text" placeholder="Your phone number" />
       <div class="button-row">
-        <button onclick="sendToWhatsApp('en')">📞 Book in English</button>
-        <button onclick="sendToWhatsApp('fr')">📞 Réserver en Français</button>
-        <button onclick="sendToWhatsApp('ar')">📞 N7ezo Shark</button>
-        <button onclick="shareSite()">🔗 Share this site</button>
+        <!-- button will be inserted here -->
       </div>
     </div>
   </div>
-<script>
-  const sharkNumber = "212617095360"; // Shark's real WhatsApp number
 
-  function sendToWhatsApp(lang) {
-    const userPhone = document.getElementById("userPhone").value.trim();
+  <script>
+    const sharkNumber = "212617095360"; // Shark's WhatsApp number
+    const userLang = navigator.language.toLowerCase();
+    let lang = 'en';
+    if (userLang.startsWith('fr')) lang = 'fr';
+    else if (userLang.startsWith('ar')) lang = 'ar';
 
-    // First get location
-    if (!navigator.geolocation) {
-      alert("Geolocation not supported on this device.");
-      return;
-    }
+    const buttonLabels = {
+      en: "📞 Book a Ride",
+      fr: "📞 Réserver une Course",
+      ar: "📞 N7ezo Shark"
+    };
 
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const lat = position.coords.latitude.toFixed(5);
-        const lon = position.coords.longitude.toFixed(5);
-        const mapsLink = `https://www.google.com/maps?q=${lat},${lon}`;
+    window.addEventListener('DOMContentLoaded', () => {
+      const buttonRow = document.querySelector(".button-row");
+      const bookBtn = document.createElement("button");
+      bookBtn.textContent = buttonLabels[lang] || buttonLabels["en"];
+      bookBtn.onclick = () => sendToWhatsApp(lang);
+      buttonRow.innerHTML = "";
+      buttonRow.appendChild(bookBtn);
+    });
 
-        let message = "";
-
-        switch (lang) {
-          case "fr":
-            message = `Salut Shark ! Je veux réserver une course à Tamraght. Mon numéro est ${userPhone}. Voici ma position: ${mapsLink}`;
-            break;
-          case "ar":
-            message = `Salam Shark! Bghit ntla9aw f Tamraght. Rani hna: ${userPhone}. Lmaw9i3 dyali: ${mapsLink}`;
-            break;
-          default:
-            message = `Hi Shark! I'd like to book a ride in Tamraght. My number is ${userPhone}. Here is my location: ${mapsLink}`;
-        }
-
-        const encoded = encodeURIComponent(message);
-        const waUrl = `https://wa.me/${sharkNumber}?text=${encoded}`;
-        window.open(waUrl, "_blank");
-      },
-      (error) => {
-        alert("Could not get your location. Please enable GPS.");
-        console.error("Geolocation error:", error);
+    function sendToWhatsApp(lang) {
+      const userPhone = document.getElementById("userPhone").value.trim();
+      if (!navigator.geolocation) {
+        alert("Geolocation not supported on this device.");
+        return;
       }
-    );
-  }
 
-  function shareSite() {
-    if (navigator.share) {
-      navigator.share({
-        title: 'Redia With Me – Book Shark!',
-        text: 'Want a ride with Shark in Tamraght? Hit this link:',
-        url: window.location.href
-      }).catch(err => console.error('Share failed:', err));
-    } else {
-      alert("Sharing not supported on this device. Just copy the URL.");
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude.toFixed(5);
+          const lon = position.coords.longitude.toFixed(5);
+          const mapsLink = `https://www.google.com/maps?q=${lat},${lon}`;
+          let message = "";
+
+          switch (lang) {
+            case "fr":
+              message = `Salut Shark ! Je veux réserver une course à Tamraght. Mon numéro est ${userPhone}. Voici ma position: ${mapsLink}`;
+              break;
+            case "ar":
+              message = `Salam Shark! Bghit ntla9aw f Tamraght. Rani hna: ${userPhone}. Lmaw9i3 dyali: ${mapsLink}`;
+              break;
+            default:
+              message = `Hi Shark! I'd like to book a ride in Tamraght. My number is ${userPhone}. Here is my location: ${mapsLink}`;
+          }
+
+          const encoded = encodeURIComponent(message);
+          const waUrl = `https://wa.me/${sharkNumber}?text=${encoded}`;
+          window.open(waUrl, "_blank");
+        },
+        (error) => {
+          alert("Could not get your location. Please enable GPS.");
+          console.error("Geolocation error:", error);
+        }
+      );
     }
-  }
-</script>
+  </script>
 </body>
 </html>
