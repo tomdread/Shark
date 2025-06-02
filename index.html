@@ -4,7 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Redia With Me – Shark Official</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-papm6Q+ua5Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-papm6Q+ua5QwV8JWxX1tL9EYXYEXeFNiWjF5t+BG/IGQhJxDMaF4Fvn08nclw+CjLOmVzFpj7CzSzSbf+5p/5A=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
   <style>
     html, body {
       height: 100%;
@@ -12,7 +18,6 @@
       padding: 0;
     }
     body {
-      min-height: 100vh;
       font-family: sans-serif;
       color: white;
       background: url('shark.jpg') no-repeat center center fixed;
@@ -20,7 +25,6 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      position: relative;
       height: 100vh;
       box-sizing: border-box;
     }
@@ -32,9 +36,9 @@
       background: rgba(0, 0, 0, 0.85);
       padding: 1rem 0.5rem 0.5rem 0.5rem;
       z-index: 100;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
       text-align: center;
       backdrop-filter: blur(4px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
     .menu h1 {
       margin: 0;
@@ -45,64 +49,15 @@
       font-size: 1.1em;
     }
     .main-content {
-      flex: 1 0 auto;
+      flex: 1;
       margin-top: 100px;
-      margin-bottom: 120px;
-      /* Ensures the image is always visible between menu and footer */
-    }
-    .footer {
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      width: 100vw;
-      background: rgba(0, 0, 0, 0.55);
-      box-shadow: 0 -2px 8px rgba(0,0,0,0.2);
-      padding: 1rem 0.5rem 0.5rem 0.5rem;
-      text-align: center;
-      z-index: 100;
-      backdrop-filter: blur(8px);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .form-container {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      width: 100%;
-      max-width: 500px;
-      margin: 0 auto 0.5em auto;
-      gap: 0.5em;
-    }
-    input[type="text"] {
-      flex-basis: 68%;
-      padding: 0.75em;
-      font-size: 1em;
-      margin-bottom: 0;
-      box-sizing: border-box;
-      border-radius: 6px;
-      border: none;
-    }
-    button {
-      flex-basis: 32%;
-      padding: 0.75em 1.5em;
-      font-size: 1em;
-      background-color: #ff4d4d;
-      border: none;
-      color: white;
-      cursor: pointer;
-      border-radius: 6px;
-      margin-bottom: 0;
-      min-width: 0;
-      width: 100%;
-    }
-    button:hover {
-      background-color: #ff1a1a;
-    }
-    .socials {
-      margin: 1.5em 0 0.5em 0;
+      margin-bottom: 140px;
       display: flex;
       justify-content: center;
+      align-items: center;
+    }
+    .socials {
+      display: flex;
       gap: 2em;
     }
     .socials a {
@@ -113,29 +68,62 @@
     .socials a:hover {
       color: #ff4d4d;
     }
+    .footer {
+      position: fixed;
+      bottom: 0;
+      width: 100vw;
+      background: rgba(0, 0, 0, 0.55);
+      padding: 1rem 0.5rem 0.5rem 0.5rem;
+      text-align: center;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.2);
+    }
+    .form-container {
+      display: flex;
+      gap: 0.5em;
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto;
+      align-items: center;
+    }
+    input[type="text"] {
+      flex: 1;
+      padding: 0.75em;
+      font-size: 1em;
+      border-radius: 6px;
+      border: none;
+      box-sizing: border-box;
+    }
+    button {
+      padding: 0.75em 1.5em;
+      font-size: 1em;
+      background-color: #ff4d4d;
+      border: none;
+      color: white;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+    button:hover {
+      background-color: #ff1a1a;
+    }
     @media (max-width: 600px) {
       .menu h1 {
         font-size: 1.3em;
       }
-      .main-content {
-        margin-top: 80px;
-        margin-bottom: 140px;
-      }
-      .footer {
-        padding: 0.7rem 0.2rem 0.2rem 0.2rem;
-      }
       .form-container {
         flex-direction: column;
-        gap: 0.5em;
-        max-width: 95vw;
+        width: 95%;
       }
       input[type="text"], button {
-        flex-basis: 100%;
         width: 100%;
-        max-width: 95vw;
       }
       .socials {
         gap: 1em;
+        flex-wrap: wrap;
       }
       .socials a {
         font-size: 1.5em;
@@ -148,14 +136,24 @@
     <h1>Shark Drive</h1>
     <p>Book The Shark for an unforgettable ride!</p>
   </div>
+
   <div class="main-content">
     <div class="socials">
-      <a href="https://web.facebook.com/ShaarkOfficiallaka" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-      <a href="https://www.youtube.com/@redsosoofficial" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-      <a href="https://www.instagram.com/shaarkofficial/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.tiktok.com/@redaidlahcen" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+      <a href="https://web.facebook.com/ShaarkOfficiallaka" target="_blank" aria-label="Facebook">
+        <i class="fab fa-facebook"></i>
+      </a>
+      <a href="https://www.youtube.com/@redsosoofficial" target="_blank" aria-label="YouTube">
+        <i class="fab fa-youtube"></i>
+      </a>
+      <a href="https://www.instagram.com/shaarkofficial/" target="_blank" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.tiktok.com/@redaidlahcen" target="_blank" aria-label="TikTok">
+        <i class="fab fa-tiktok"></i>
+      </a>
     </div>
   </div>
+
   <div class="footer">
     <div class="form-container">
       <input type="text" placeholder="Enter your phone number..." />
