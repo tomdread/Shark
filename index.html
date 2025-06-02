@@ -4,112 +4,162 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Redia With Me – Shark Official</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-papm6Q+ua5Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Qw1Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
-    body {
+    html, body {
+      height: 100%;
       margin: 0;
+      padding: 0;
+    }
+    body {
+      min-height: 100vh;
       font-family: sans-serif;
       color: white;
       background: url('shark.jpg') no-repeat center center fixed;
       background-size: cover;
-    }
-    .overlay {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 2rem 1rem;
-      text-align: center;
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-    }
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 0.5em;
-    }
-    .socials {
-      margin-top: 2em;
-    }
-    .socials a {
-      display: inline-block;
-      margin: 0.5em;
-      color: white;
-      text-decoration: none;
-      font-size: 1.2em;
-    }
-    .form-container {
-      margin-top: 2em;
-      padding: 0 1rem;
-    }
-    input[type="text"] {
-      padding: 0.75em;
-      width: 100%;
-      max-width: 400px;
-      font-size: 1em;
-      margin-bottom: 1em;
+      justify-content: space-between;
+      position: relative;
+      height: 100vh;
       box-sizing: border-box;
     }
+    .menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      background: rgba(0, 0, 0, 0.85);
+      padding: 1rem 0.5rem 0.5rem 0.5rem;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      text-align: center;
+      backdrop-filter: blur(4px);
+    }
+    .menu h1 {
+      margin: 0;
+      font-size: 2em;
+    }
+    .menu p {
+      margin: 0.5em 0 0;
+      font-size: 1.1em;
+    }
+    .main-content {
+      flex: 1 0 auto;
+      margin-top: 100px;
+      margin-bottom: 120px;
+      /* Ensures the image is always visible between menu and footer */
+    }
+    .footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100vw;
+      background: rgba(0, 0, 0, 0.55);
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.2);
+      padding: 1rem 0.5rem 0.5rem 0.5rem;
+      text-align: center;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .form-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto 0.5em auto;
+      gap: 0.5em;
+    }
+    input[type="text"] {
+      flex-basis: 68%;
+      padding: 0.75em;
+      font-size: 1em;
+      margin-bottom: 0;
+      box-sizing: border-box;
+      border-radius: 6px;
+      border: none;
+    }
     button {
+      flex-basis: 32%;
       padding: 0.75em 1.5em;
       font-size: 1em;
       background-color: #ff4d4d;
       border: none;
       color: white;
       cursor: pointer;
-      min-width: 200px;
+      border-radius: 6px;
+      margin-bottom: 0;
+      min-width: 0;
+      width: 100%;
     }
     button:hover {
       background-color: #ff1a1a;
     }
-
-    @media (max-width: 480px) and (orientation: portrait) {
-      body {
-        background-position: center center;
-        background-size: cover;
-        background-attachment: fixed;
+    .socials {
+      margin: 1.5em 0 0.5em 0;
+      display: flex;
+      justify-content: center;
+      gap: 2em;
+    }
+    .socials a {
+      color: white;
+      font-size: 2em;
+      transition: color 0.2s;
+    }
+    .socials a:hover {
+      color: #ff4d4d;
+    }
+    @media (max-width: 600px) {
+      .menu h1 {
+        font-size: 1.3em;
       }
-      .overlay {
-        background: rgba(0, 0, 0, 0.7);
-        padding: 1.5rem 0.5rem;
+      .main-content {
+        margin-top: 80px;
+        margin-bottom: 140px;
       }
-      h1 {
-        font-size: 2em;
+      .footer {
+        padding: 0.7rem 0.2rem 0.2rem 0.2rem;
+      }
+      .form-container {
+        flex-direction: column;
+        gap: 0.5em;
+        max-width: 95vw;
+      }
+      input[type="text"], button {
+        flex-basis: 100%;
+        width: 100%;
+        max-width: 95vw;
+      }
+      .socials {
+        gap: 1em;
       }
       .socials a {
-        margin: 0.3em;
-        font-size: 1em;
-      }
-      button {
-        width: 100%;
-        max-width: 300px;
-      }
-    }
-
-    @media (max-width: 480px) and (orientation: landscape) {
-      body {
-        background-position: center center;
-        background-size: cover;
-      }
-      .overlay {
-        background: rgba(0, 0, 0, 0.8);
+        font-size: 1.5em;
       }
     }
   </style>
 </head>
 <body>
-  <div class="overlay">
-    <h1>Redia With Me 🚗🔥</h1>
-    <p>Book Shark (Reda ID Lahcen) for an unforgettable ride!</p>
-
+  <div class="menu">
+    <h1>Shark Drive</h1>
+    <p>Book The Shark for an unforgettable ride!</p>
+  </div>
+  <div class="main-content">
+    <div class="socials">
+      <a href="https://web.facebook.com/ShaarkOfficiallaka" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+      <a href="https://www.youtube.com/@redsosoofficial" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.instagram.com/shaarkofficial/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@redaidlahcen" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+    </div>
+  </div>
+  <div class="footer">
     <div class="form-container">
       <input type="text" placeholder="Enter your phone number..." />
-      <br />
       <button>Book a Ride</button>
-    </div>
-
-    <div class="socials">
-      <a href="https://web.facebook.com/ShaarkOfficiallaka" target="_blank">Facebook</a>
-      <a href="https://www.youtube.com/@redsosoofficial" target="_blank">YouTube</a>
-      <a href="https://www.instagram.com/shaarkofficial/" target="_blank">Instagram</a>
-      <a href="https://www.tiktok.com/@redaidlahcen" target="_blank">TikTok</a>
     </div>
   </div>
 </body>
