@@ -133,17 +133,16 @@
     </div>
   </div>
 
-  <script>
-    const sharkNumber = "‪212609465696‬";
+ <script>
+  const sharkNumber = "212707052723";
 
-    function sendText() {
-      const userPhone = document.getElementById("userPhone").value.trim();
-      const message = `Hi Shark! I want a ride in Tamraght. My number is ${userPhone}`;
-      const encoded = encodeURIComponent(message);
-      const waUrl = `https://wa.me/${sharkNumber}?text=${encoded}`;
-
-      window.location.href = waUrl; // Always works in Safari
-    }
-  </script>
+  function sendText() {
+    const userPhone = document.getElementById("userPhone").value.trim();
+    const message = `Hi Shark! I want a ride in Tamraght. My number is ${userPhone}`;
+    const encoded = encodeURIComponent(message);
+    const waUrl = `https://wa.me/${sharkNumber}?text=${encoded}`;
+    window.location.href = waUrl;
+  }
+</script>
 </body>
 </html>
