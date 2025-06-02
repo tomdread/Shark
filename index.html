@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redia With Me – Shark Official</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      color: white;
+      background: url('shark.jpeg') no-repeat center center fixed;
+      background-size: cover;
+    }
+    .overlay {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 2rem 1rem;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 0.5em;
+    }
+    .socials {
+      margin-top: 2em;
+    }
+    .socials a {
+      display: inline-block;
+      margin: 0.5em;
+      color: white;
+      text-decoration: none;
+      font-size: 1.2em;
+    }
+    .form-container {
+      margin-top: 2em;
+      padding: 0 1rem;
+    }
+    input[type="text"] {
+      padding: 0.75em;
+      width: 100%;
+      max-width: 400px;
+      font-size: 1em;
+      margin-bottom: 1em;
+      box-sizing: border-box;
+    }
+    button {
+      padding: 0.75em 1.5em;
+      font-size: 1em;
+      background-color: #ff4d4d;
+      border: none;
+      color: white;
+      cursor: pointer;
+      min-width: 200px;
+    }
+    button:hover {
+      background-color: #ff1a1a;
+    }
+
+    @media (max-width: 480px) and (orientation: portrait) {
+      body {
+        background-position: center center;
+        background-size: cover;
+        background-attachment: fixed;
+      }
+      .overlay {
+        background: rgba(0, 0, 0, 0.7);
+        padding: 1.5rem 0.5rem;
+      }
+      h1 {
+        font-size: 2em;
+      }
+      .socials a {
+        margin: 0.3em;
+        font-size: 1em;
+      }
+      button {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+
+    @media (max-width: 480px) and (orientation: landscape) {
+      body {
+        background-position: center center;
+        background-size: cover;
+      }
+      .overlay {
+        background: rgba(0, 0, 0, 0.8);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <h1>Redia With Me 🚗🔥</h1>
+    <p>Book Shark (Reda ID Lahcen) for an unforgettable ride!</p>
+
+    <div class="form-container">
+      <input type="text" placeholder="Enter your phone number..." />
+      <br />
+      <button>Book a Ride</button>
+    </div>
+
+    <div class="socials">
+      <a href="https://web.facebook.com/ShaarkOfficiallaka" target="_blank">Facebook</a>
+      <a href="https://www.youtube.com/@redsosoofficial" target="_blank">YouTube</a>
+      <a href="https://www.instagram.com/shaarkofficial/" target="_blank">Instagram</a>
+      <a href="https://www.tiktok.com/@redaidlahcen" target="_blank">TikTok</a>
+    </div>
+  </div>
+</body>
+</html>
