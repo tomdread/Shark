@@ -128,13 +128,13 @@
       <p>Book Shark for a ride in Tamraght</p>
       <input id="userPhone" type="text" placeholder="Your phone number" />
       <div class="button-row">
-        <!-- button will be inserted here -->
+        <!-- Button inserted by JS -->
       </div>
     </div>
   </div>
 
   <script>
-    const sharkNumber = "212617095360"; // Shark's WhatsApp number
+    const sharkNumber = "212617095360";
     const userLang = navigator.language.toLowerCase();
     let lang = 'en';
     if (userLang.startsWith('fr')) lang = 'fr';
@@ -157,6 +157,8 @@
 
     function sendToWhatsApp(lang) {
       const userPhone = document.getElementById("userPhone").value.trim();
+      const newWindow = window.open("", "_blank");
+
       if (!navigator.geolocation) {
         alert("Geolocation not supported on this device.");
         return;
@@ -182,9 +184,10 @@
 
           const encoded = encodeURIComponent(message);
           const waUrl = `https://wa.me/${sharkNumber}?text=${encoded}`;
-          window.open(waUrl, "_blank");
+          newWindow.location.href = waUrl;
         },
         (error) => {
+          newWindow.close();
           alert("Could not get your location. Please enable GPS.");
           console.error("Geolocation error:", error);
         }
